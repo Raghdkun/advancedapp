@@ -8,7 +8,7 @@ use App\Http\Requests\SubmitFormRequest;
 use App\Services\SubmissionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class SubmissionController extends Controller
 {
     public function __construct(
@@ -47,7 +47,7 @@ class SubmissionController extends Controller
             $submission = $this->submissionService->submitForm(
                 $formId,
                 $request->input('data'),
-                $request->input('user_id')
+                Auth::id()
             );
 
             return response()->json([
