@@ -1,0 +1,406 @@
+{
+	"info": {
+		"name": "Dynamic Forms API",
+		"description": "API collection for Dynamic Forms System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Field Types",
+			"item": [
+				{
+					"name": "Get All Field Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/field-types",
+							"host": ["{{base_url}}"],
+							"path": ["api", "field-types"]
+						}
+					}
+				},
+				{
+					"name": "Get Field Type by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/field-types/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "field-types", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Forms",
+			"item": [
+				{
+					"name": "Get All Forms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/forms",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms"]
+						}
+					}
+				},
+				{
+					"name": "Get Active Forms Only",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/forms?active_only=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms"],
+							"query": [
+								{
+									"key": "active_only",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Form by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/forms/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1"]
+						}
+					}
+				},
+				{
+					"name": "Create Form",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Contact Form\",\n  \"description\": \"Simple contact form\",\n  \"version\": 1,\n  \"is_active\": true,\n  \"fields\": [\n    {\n      \"label\": \"Full Name\",\n      \"field_type_id\": 1,\n      \"order\": 0,\n      \"is_required\": true,\n      \"validation_rules\": [\"min:3\", \"max:255\"]\n    },\n    {\n      \"label\": \"Email Address\",\n      \"field_type_id\": 2,\n      \"order\": 1,\n      \"is_required\": true,\n      \"validation_rules\": [\"email\"]\n    },\n    {\n      \"label\": \"Message\",\n      \"field_type_id\": 4,\n      \"order\": 2,\n      \"is_required\": true,\n      \"validation_rules\": [\"min:10\"]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/forms",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms"]
+						}
+					}
+				},
+				{
+					"name": "Create Form with Dropdown",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Survey Form\",\n  \"description\": \"Customer satisfaction survey\",\n  \"version\": 1,\n  \"is_active\": true,\n  \"fields\": [\n    {\n      \"label\": \"Your Name\",\n      \"field_type_id\": 1,\n      \"order\": 0,\n      \"is_required\": true\n    },\n    {\n      \"label\": \"Satisfaction Level\",\n      \"field_type_id\": 6,\n      \"order\": 1,\n      \"is_required\": true,\n      \"options\": [\n        {\n          \"value\": \"very_satisfied\",\n          \"label\": \"Very Satisfied\",\n          \"order\": 0\n        },\n        {\n          \"value\": \"satisfied\",\n          \"label\": \"Satisfied\",\n          \"order\": 1\n        },\n        {\n          \"value\": \"neutral\",\n          \"label\": \"Neutral\",\n          \"order\": 2\n        },\n        {\n          \"value\": \"dissatisfied\",\n          \"label\": \"Dissatisfied\",\n          \"order\": 3\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/forms",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms"]
+						}
+					}
+				},
+				{
+					"name": "Update Form",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Contact Form\",\n  \"description\": \"Updated description\",\n  \"is_active\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/forms/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Form",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/forms/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1"]
+						}
+					}
+				},
+				{
+					"name": "Duplicate Form",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"version\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/forms/1/duplicate",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1", "duplicate"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Fields",
+			"item": [
+				{
+					"name": "Get Fields by Form ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/fields?form_id=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "fields"],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Field by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/fields/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "fields", "1"]
+						}
+					}
+				},
+				{
+					"name": "Create Field",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"form_id\": 1,\n  \"label\": \"Phone Number\",\n  \"field_type_id\": 14,\n  \"order\": 3,\n  \"is_required\": false,\n  \"validation_rules\": [\"regex:/^[0-9]{10}$/\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/fields",
+							"host": ["{{base_url}}"],
+							"path": ["api", "fields"]
+						}
+					}
+				},
+				{
+					"name": "Update Field",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"label\": \"Updated Phone Number\",\n  \"is_required\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/fields/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "fields", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Field",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/fields/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "fields", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Submissions",
+			"item": [
+				{
+					"name": "Get All Submissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/submissions?form_id=1&per_page=15",
+							"host": ["{{base_url}}"],
+							"path": ["api", "submissions"],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "15"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Submission by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/submissions/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "submissions", "1"]
+						}
+					}
+				},
+				{
+					"name": "Submit Form",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"1\": \"John Doe\",\n    \"2\": \"john.doe@example.com\",\n    \"3\": \"This is my message content.\"\n  },\n  \"user_id\": null\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/forms/1/submit",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1", "submit"]
+						},
+						"description": "Note: The keys in the data object are field IDs, and values are the submitted values for those fields."
+					}
+				},
+				{
+					"name": "Query Submissions by Field Value",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"field_id\": 1,\n  \"value\": \"John\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/forms/1/submissions/query",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1", "submissions", "query"]
+						},
+						"description": "Search submissions where field 1 contains 'John'"
+					}
+				},
+				{
+					"name": "Query Submissions by Multiple Fields",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"filters\": [\n    {\n      \"field_id\": 1,\n      \"value\": \"%John%\",\n      \"operator\": \"LIKE\"\n    },\n    {\n      \"field_id\": 2,\n      \"value\": \"%@example.com%\",\n      \"operator\": \"LIKE\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/forms/1/submissions/query",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1", "submissions", "query"]
+						},
+						"description": "Search submissions with multiple field filters"
+					}
+				},
+				{
+					"name": "Get Submission Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/forms/1/submissions/statistics",
+							"host": ["{{base_url}}"],
+							"path": ["api", "forms", "1", "submissions", "statistics"]
+						}
+					}
+				},
+				{
+					"name": "Delete Submission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/submissions/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "submissions", "1"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
