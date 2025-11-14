@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\User as RemoteUser;
 
 class AuthCheckingForToken
 {
@@ -89,7 +90,15 @@ class AuthCheckingForToken
         // Note: your auth service already enforced permissions; we set them only for convenience
         $userArr['roles']       = $data['roles'] ?? [];
         $userArr['permissions'] = $data['permissions'] ?? [];
-
+RemoteUser::updateOrCreate(
+    ['id' => $userArr['id']],
+    [
+        'name'        => $userArr['name']      ?? null,
+        'email'       => $userArr['email']     ?? null,
+        'roles'       => $data['roles']       ?? [],
+        'permissions' => $data['permissions'] ?? [],
+    ]
+);
         $genericUser = new GenericUser($userArr);
         Auth::setUser($genericUser);
 
@@ -125,8 +134,8 @@ class AuthCheckingForToken
         $userArr['roles']       = $data['roles'] ?? [];
         $userArr['permissions'] = $data['permissions'] ?? [];
 
-        $genericUser = new \Illuminate\Auth\GenericUser($userArr);
-        \Illuminate\Support\Facades\Auth::setUser($genericUser);
+        $genericUser = new GenericUser($userArr);
+        Auth::setUser($genericUser);
 
         return $next($request);
     }
